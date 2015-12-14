@@ -1,0 +1,13 @@
+<!-- <%= form_tag url: {action: "create"} do %>
+
+<%= text_field(:question, :name) %>
+<%= text_field(:question, :description) %>
+<input type="button" name="submit" value="submit">
+<% end %> -->
+
+
+<%= form_for @question, url: {action: "create"} do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :description %>
+  <%= f.submit "Create" %>
+<% end %>
