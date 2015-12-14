@@ -2,3 +2,22 @@
 <p>
   <%=@question.description%>
 </p>
+<h2>Answers</h2>
+<%if @answers.nil?%>
+<p>
+  No Answers Yet!
+</p>
+<%else%>
+<% @answers.each do |answer|%>
+<li>
+  <%=answer.description%>
+</li>
+<%end%>
+<%end%>
+<h3>Answer the Question!</h3>
+
+<%= form_for @answer, url: {action: "create", :controller=>"answers"} do |f| %>
+  <%= f.text_field :description %>
+  <%= hidden_field_tag :question_id, value = @question.id%>
+  <%= f.submit "Post Answer"%>
+<% end %>

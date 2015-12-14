@@ -24,17 +24,25 @@ class AnswersController < ApplicationController
   # POST /answers
   # POST /answers.json
   def create
-    @answer = Answer.new(answer_params)
 
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+    # @answer = Answer.new(answer_params)
+    @answer = Answer.create!(description: params[:answer][:description] , question_id: params[:question_id])
+    question = Question.find(params[:question_id])
+    # @answer = Answer.create!(description: params[:answer][:description] )
+    #
+    # respond_to do |format|
+    #   if @answer.save
+    #     format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+    #     format.json { render :show, status: :created, location: @answer }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @answer.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    redirect_to question_path(question)
+    # action: "show" , :controller=>"questions"
+  
+
   end
 
   # PATCH/PUT /answers/1
@@ -69,6 +77,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:description)
+      params.require(:answer).permit(:description, questions_attributes: [:id])
     end
 end
