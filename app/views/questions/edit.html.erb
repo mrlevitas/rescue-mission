@@ -1,0 +1,16 @@
+<h1>Edit the question</h1>
+
+<%if @error_message != nil%>
+  <h2><%=@error_message%></h2>
+<%end%>
+
+<%=form_for @question do |f|%>
+  <%=f.label :name, "Name"%>
+  <%=f.text_field :name%>
+
+  <%=f.label :description, "Description"%>
+  <%=f.text_field :description%>
+
+  <%=f.submit "Edit Question"%>
+<%end%>
+<%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id}, method: 'delete'%>

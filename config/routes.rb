@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root 'questions#index'
-  resources :questions
-  resources :answers
+  resources :questions do
+    resources :answers
+  end
 end

@@ -1,23 +1,25 @@
 <h1><%=@question.name%></h1>
-<p>
-  <%=@question.description%>
-</p>
+  <p>
+    <%=@question.description%>
+    <%= link_to 'edit', edit_question_path %>
+    <%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id}, method: 'delete'%>
+  </p>
 <h2>Answers</h2>
 <%if @answers.nil?%>
-<p>
-  No Answers Yet!
-</p>
+  <p>
+    No Answers Yet!
+  </p>
 <%else%>
-<% @answers.each do |answer|%>
-<li>
-  <%=answer.description%>
-</li>
-<%end%>
+  <% @answers.each do |answer|%>
+  <li>
+    <%=answer[:description]%>
+  </li>
+  <%end%>
 <%end%>
 <h3>Answer the Question!</h3>
-
-<%= form_for @answer, url: {action: "create", :controller=>"answers"} do |f| %>
+<!-- , url: {action: "create", :controller=>"answers"} -->
+<%= form_for [@question, @answer] do |f| %>
   <%= f.text_field :description %>
-  <%= hidden_field_tag :question_id, value = @question.id%>
+  <!-- <%= f.hidden_field :question_id, value: @question.id%> -->
   <%= f.submit "Post Answer"%>
 <% end %>

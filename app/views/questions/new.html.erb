@@ -4,10 +4,14 @@
 <%= text_field(:question, :description) %>
 <input type="button" name="submit" value="submit">
 <% end %> -->
-
+<%if @error_message != nil%>
+  <h1><%=@error_message%></h1>
+<%end%>
 
 <%= form_for @question, url: {action: "create"} do |f| %>
+  <%=f.label :name, "Name"%>
   <%= f.text_field :name %>
+  <%=f.label :description, "Description"%>
   <%= f.text_field :description %>
   <%= f.submit "Create" %>
 <% end %>

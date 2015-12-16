@@ -22,12 +22,16 @@ class AnswersController < ApplicationController
   end
 
   # POST /answers
-  # POST /answers.json
+  # POST /questions/:question_id/answers
   def create
 
     # @answer = Answer.new(answer_params)
-    @answer = Answer.create!(description: params[:answer][:description] , question_id: params[:question_id])
-    question = Question.find(params[:question_id])
+    # @answer = Answer.create!(description: params[:answer][:description] , question_id: params[:question_id])
+    # binding.pry
+    @question = Question.find(params[:question_id])
+
+    @answer = Answer.create!(answer_params)
+    # question = Question.find(params[:answer][:question_id])
     # @answer = Answer.create!(description: params[:answer][:description] )
     #
     # respond_to do |format|
@@ -39,9 +43,9 @@ class AnswersController < ApplicationController
     #     format.json { render json: @answer.errors, status: :unprocessable_entity }
     #   end
     # end
-    redirect_to question_path(question)
+    redirect_to question_path(@question)
     # action: "show" , :controller=>"questions"
-  
+
 
   end
 
@@ -77,6 +81,11 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:description, questions_attributes: [:id])
+      # params.permit(:question_id )
+      answer_params = {}
+      # binding.pry
+      answer_params.store(:question_id, params.require(:question_id))
+      answer_params.store(:description , params.require(:answer).require(:description))
+      return answer_params
     end
 end
