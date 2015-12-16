@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
       @question = Question.find(params[:id])
       @question[:name] = params[:question][:name]
       @question[:description] = params[:question][:description]
-      @error_message = "Please fill the form in correctly: min 40 char for name and 150 for descrition"
+      @error_message = "Please fill the form in correctly: min 40 char for name and 150 for description"
       render :edit
     end
   end
