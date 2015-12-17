@@ -1,8 +1,11 @@
+
 <h1><%=@question.name%></h1>
   <p>
     <%=@question.description%>
     <%= link_to 'edit', edit_question_path %>
-    <%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id}, method: 'delete'%>
+    <div>
+    <%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id, method: 'delete'} , form_class: "button"%>
+    </div>
   </p>
 <h2>Answers</h2>
 <%if @answers.nil?%>
@@ -21,5 +24,5 @@
 <%= form_for [@question, @answer] do |f| %>
   <%= f.text_field :description %>
   <!-- <%= f.hidden_field :question_id, value: @question.id%> -->
-  <%= f.submit "Post Answer"%>
+  <%= f.submit "Post Answer",  :class =>  "button"%>
 <% end %>

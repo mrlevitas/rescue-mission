@@ -1,14 +1,23 @@
 <h1>Questions</h1>
 <!-- <p>Find me in app/views/questions/index.html.erb</p> -->
+<p>
 
+<% if current_user %>
+     <%= link_to "Sign out", "/sign_out" %>
+   <% else %>
+     <%= link_to "Sign in with Github", "/auth/github" %>
+   <% end %>
 
+ </p> 
 <ul>
 
 <% @questions.each do |question|%>
-<li>
-  <%= link_to question.name, question_path(question)%>
-<hr>
-</li>
+<div class="inline-list">
+  <li>
+    <%= link_to question.name, question_path(question)%>
+    <hr>
+  </li>
+</div>
 <%end%>
 
 </ul>

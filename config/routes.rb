@@ -57,4 +57,7 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers
   end
+
+  get '/auth/github/callback', to: 'session#github'
+  get '/sign_out', to: 'session#destroy'
 end
