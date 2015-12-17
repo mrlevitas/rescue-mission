@@ -4,7 +4,7 @@
     <%=@question.description%>
     <%= link_to 'edit', edit_question_path %>
     <div>
-    <%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id, method: 'delete'} , form_class: "button"%>
+    <%= button_to "delete", {controller: 'questions', action: 'destroy', id: @question.id}, {method: :delete, form_class: "button"}%>
     </div>
   </p>
 <h2>Answers</h2>

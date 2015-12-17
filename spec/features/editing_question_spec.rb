@@ -11,12 +11,13 @@ require 'rails_helper'
 
 feature "edit a question" do
   scenario "user visits question show page and edits the question on separate page" do
-
+    user = FactoryGirl.create(:user)
     string1 = "What's the deal with all these bugs???What's the deal with all these bugs???What's the deal with all these bugs???"
     string2 = "THere's this bug in my soup and I don't know how to get it out. Please halp.THere's this bug in my soup and I don't know how to get it out. Please halp."
     string3 = "My computer won't turn on...what do I do?My computer won't turn on...what do I do?My computer won't turn on...what do I do?My computer won't turn on...what do I do?My computer won't turn on...what do I do?"
     string4 = "I push the button and nothing happens.I push the button and nothing happens. I push the button and nothing happens. I push the button and nothing happens. I push the button and nothing happens. I push the button and nothing happens. I push the button and nothing happens. I push the button and nothing happens.I push the button and nothing happens.I push the button and nothing happens."
-    q1 = Question.create(name: string1, description: string2)
+    q1 = Question.create(name: string1, description: string2, user: user)
+    sign_in_as user
     visit questions_path
     click_link(q1.name)
     click_link("edit")
@@ -30,13 +31,14 @@ feature "edit a question" do
   end
 
   scenario "user visits question show page and edits the question on separate page incorrectly" do
-
+    user = FactoryGirl.create(:user)
     string1 = "What's the deal with all these bugs???What's the deal with all these bugs???What's the deal with all these bugs???"
     string2 = "THere's this bug in my soup and I don't know how to get it out. Please halp.THere's this bug in my soup and I don't know how to get it out. Please halp."
     string3 = "My computer won't turn on...what do I do?"
     string4 = "I push the button and nothing happens."
     error = "Please fill the form in correctly: min 40 char for name and 150 for description"
-    q1 = Question.create(name: string1, description: string2)
+    q1 = Question.create(name: string1, description: string2, user: user)
+    sign_in_as user
     visit questions_path
     click_link(q1.name)
     click_link("edit")

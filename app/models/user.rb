@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
       user.avatar_url = auth.info.image
     end
   end
+  has_many :answers
+  has_many :questions
 end

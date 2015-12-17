@@ -86,6 +86,8 @@ class AnswersController < ApplicationController
       # binding.pry
       answer_params.store(:question_id, params.require(:question_id))
       answer_params.store(:description , params.require(:answer).require(:description))
+      
+      answer_params.store(:user_id , session[:user_id])
       return answer_params
     end
 end

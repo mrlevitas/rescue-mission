@@ -60,4 +60,5 @@ Rails.application.routes.draw do
 
   get '/auth/github/callback', to: 'session#github'
   get '/sign_out', to: 'session#destroy'
+
 end

@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
   def create
     @error_message = nil
     if params[:question][:name].length >= 40 && params[:question][:description].length >= 150
-      @question = Question.create!(name: params[:question][:name], description: params[:question][:description])
+      @question = Question.create!(name: params[:question][:name], description: params[:question][:description] , user_id: session[:user_id])
       redirect_to action: "index"
     else
       @question = Question.new(name: params[:question][:name], description: params[:question][:description])
